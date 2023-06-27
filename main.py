@@ -17,16 +17,16 @@ logger = logging.getLogger(__name__)
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
-conn = sqlite3.connect('users.db')
-cursor = conn.cursor()
+with sqlite3.connect('users.db') as conn:
+    cursor = conn.cursor()
 
-# Создаем таблицу, если она не существует
-cursor.execute('''CREATE TABLE IF NOT EXISTS users
-                  (user_id INTEGER PRIMARY KEY, 
-                  interaction_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
-               '''
-               )
-conn.commit()
+    # Создаем таблицу, если она не существует
+    cursor.execute('''CREATE TABLE IF NOT EXISTS users
+                      (user_id INTEGER PRIMARY KEY, 
+                      interaction_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+                   '''
+                   )
+    conn.commit()
 
 
 @bot.message_handler(commands=['start'])
