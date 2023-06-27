@@ -3,12 +3,12 @@ import requests
 import sqlite3
 import telebot
 from utils import check, get_connection
-from constants import TELEGRAM_TOKEN
+from constants import TELEGRAM_TOKEN, FORMAT
 
 
 logging.basicConfig(
         level=logging.INFO,
-        format='%(asctime)s, %(levelname)s, %(name)s, %(message)s',
+        format=FORMAT,
         filename='main.log',
         encoding='utf-8'
     )
