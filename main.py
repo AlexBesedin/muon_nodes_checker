@@ -19,7 +19,6 @@ bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
 with sqlite3.connect('users.db') as conn:
     cursor = conn.cursor()
-
     # Создаем таблицу, если она не существует
     cursor.execute('''CREATE TABLE IF NOT EXISTS users
                       (user_id INTEGER PRIMARY KEY, 
@@ -33,7 +32,6 @@ with sqlite3.connect('users.db') as conn:
 def start_command_handler(message):
     """Обработчик команды /start"""
     user_id = message.from_user.id
-
     # Получаем новое соединение
     conn = get_connection()
     cursor = conn.cursor()
@@ -85,8 +83,8 @@ def about_command_handler(message):
     bot.send_message(chat_id=message.chat.id,
                      text=(
                          '*ABOUT*\r\n\n'
-                         '*Author*: [Alex Beszedin](https://github.com/AlexBesedin)\n'
-                     ),
+                         '[Alex Beszedin](https://github.com/AlexBesedin) - *Python-developer (back-end)*\n'
+                         ),
                      parse_mode='Markdown'
                      )
 
@@ -120,6 +118,9 @@ def text_message_handler(message):
             if response.status_code == 200:
                 json_data = response.json()
                 manager_contract = json_data.get('managerContract', {})
+                node_cont = json_data.get('node', {})
+                uptime_info = node_cont.get('uptime', '')
+                networking_port = node_cont.get('networkingPort', '')
                 network_info = manager_contract.get('network', '')
                 staker_info = json_data.get('staker', '')
                 node_address_info = json_data.get('address', '')
@@ -135,13 +136,14 @@ def text_message_handler(message):
                     f"⚙️Network: {network_info}\n"
                     f"📲Staker: `{staker_info}`\n"
                     f"💰Node: `{node_address_info}`\n"
-                    f"⛓Peer id: `{perr_id_info}`"
+                    f"⛓Peer id: `{perr_id_info}`\n"
+                    f"📟Uptime: `{uptime_info}`\n"
+                    f"🔋NetworkingPort: `{networking_port}`"
                 )
                 bot.send_message(chat_id=message.chat.id,
                                  text=message_text,
                                  parse_mode='Markdown'
                                  )
-
             else:
                 # Если запрос не выполнен успешно, отправляем сообщение об ошибке
                 bot.send_message(chat_id=message.chat.id,
@@ -151,13 +153,13 @@ def text_message_handler(message):
             logger.error(f'Request timed out: {str(t)}')
             # Если запрос превысил время ожидания, отправляем сообщение об ошибке
             bot.send_message(chat_id=message.chat.id,
-                             text="The request timeout has elapsed. Check if your node works or try again later."
+                             text="⚠️⚠️⚠️\nThe request timeout has elapsed.\nCheck if your node works or try again later."
                              )
         except requests.exceptions.RequestException as r:
             # Если возникла другая ошибка запроса, отправляем сообщение об ошибке
-            logger.error(f'Request error: {str(t)}')
+            logger.error(f'Request error: {str(r)}')
             bot.send_message(chat_id=message.chat.id,
-                             text="An error occurred while executing the request. Please try again."
+                             text="An error occurred while executing the request.\nPlease try again."
                              )
 
 
