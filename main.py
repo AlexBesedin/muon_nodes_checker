@@ -1,3 +1,4 @@
+import os
 import logging
 import requests
 import sqlite3
@@ -47,7 +48,10 @@ def start_command_handler(message):
             cursor.execute("INSERT INTO users (user_id) VALUES (?)", (user_id,))
             conn.commit()
         username = message.from_user.username
-        bot.send_message(chat_id=message.chat.id, text=f'Hello, {username}!\n\n*Enter the IP-address of your node:*\n\n''_Example_: 99.99.999.99', parse_mode='Markdown')
+        bot.send_message(chat_id=message.chat.id, text=f'Hello, {username}!\n\n*Enter the IP-address of your node:*\n\n''_Example:_', parse_mode='Markdown')
+        image_path = os.path.join('pic', 'picpic.jpg')
+        with open(image_path, 'rb') as image:
+            bot.send_photo(chat_id=message.chat.id, photo=image)
     except Exception as e:
         logger.error(f'An error occurred in the /start command handler: {str(e)}')
     cursor.close()
