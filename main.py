@@ -4,7 +4,7 @@ import requests
 import sqlite3
 import telebot
 from utils import check, get_connection
-from constants import TELEGRAM_TOKEN, FORMAT
+from constants import TELEGRAM_TOKEN, FORMAT, MUON_TEXT, ABOUT_TEXT, HELP_TEXT
 
 
 logging.basicConfig(
@@ -55,7 +55,9 @@ def start_command_handler(message):
                          )
         image_path = os.path.join('pic', 'picpic.jpg')
         with open(image_path, 'rb') as image:
-            bot.send_photo(chat_id=message.chat.id, photo=image)
+            bot.send_photo(chat_id=message.chat.id, 
+                           photo=image
+                           )
     except Exception as e:
         logger.error(f'An error occurred in the /start command handler: {str(e)}')
     finally:
@@ -67,12 +69,7 @@ def start_command_handler(message):
 def help_command_handler(message):
     """Обработчик команды /help"""
     bot.send_message(chat_id=message.chat.id,
-                     text=(
-                         '/start - Initializing the bot\r\n'
-                         '/help - Information on bot commands\r\n'
-                         '/muon - About Muon Network\r\n'
-                         '/about - About the author and the project.\r\n'
-                     ),
+                     text=HELP_TEXT,
                      parse_mode='Markdown'
                      )
 
@@ -81,10 +78,7 @@ def help_command_handler(message):
 def about_command_handler(message):
     """Обработчик команды /about"""
     bot.send_message(chat_id=message.chat.id,
-                     text=(
-                         '*ABOUT*\r\n\n'
-                         '[Alex Beszedin](https://github.com/AlexBesedin) - *Python-developer (back-end)*\n'
-                         ),
+                     text=ABOUT_TEXT,
                      parse_mode='Markdown'
                      )
 
@@ -93,13 +87,7 @@ def about_command_handler(message):
 def muon_command_handler(message):
     """Обработчик команды /muon"""
     bot.send_message(chat_id=message.chat.id,
-                     text=(
-                         "What is Muon?\n\n"
-                         "`Muon is a decentralized oracle network that carries out data requests from any source`.\n"
-                         "`Muon acts as a unique inter-blockchain data-availability network that makes messaging and secure` "
-                         "`data interfacing possible between different chains that are otherwise incompatible`.\n\n"
-                         "[Muon Docs](https://docs.muon.net/muon-network/) | [Muon Explorer](https://explorer.muon.net/)"
-                     ),
+                     text=MUON_TEXT,
                      parse_mode='Markdown'
                      )
 
@@ -153,13 +141,15 @@ def text_message_handler(message):
             logger.error(f'Request timed out: {str(t)}')
             # Если запрос превысил время ожидания, отправляем сообщение об ошибке
             bot.send_message(chat_id=message.chat.id,
-                             text="⚠️⚠️⚠️\nThe request timeout has elapsed.\nCheck if your node works or try again later."
+                             text="⚠️⚠️⚠️\nThe request timeout has elapsed.\n"
+                             "Check if your node works or try again later."
                              )
         except requests.exceptions.RequestException as r:
             # Если возникла другая ошибка запроса, отправляем сообщение об ошибке
             logger.error(f'Request error: {str(r)}')
             bot.send_message(chat_id=message.chat.id,
-                             text="An error occurred while executing the request.\nPlease try again."
+                             text="An error occurred while executing the request.\n"
+                             "Please try again."
                              )
 
 
