@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+MUON_URL = 'https://explorer.muon.net/'
+LINKS_NODE_ID = 'https://explorer.muon.net/nodes/'
 FORMAT = '%(asctime)s, %(levelname)s, %(name)s, %(message)s'
 MUON_TEXT = (
     "What is Muon?\n\n"
@@ -17,8 +19,17 @@ ABOUT_TEXT = (
     '[Alex Beszedin](https://github.com/AlexBesedin) - *Python-developer (back-end)*\n'
     )
 HELP_TEXT = (
-    '/start - Initializing the bot\r\n'
-    '/help - Information on bot commands\r\n'
-    '/muon - About Muon Network\r\n'
-    '/about - About the author and the project.\r\n'
+    '/start - Initializing the bot\n'
+    '/status - Muon nodes status(total number, active and inactive nodes)\n'
+    '/muon - About Muon Network\n'
+    '/about - About the author\n'
+    '/help - Information on bot commands\n'
     )
+TIMEOUT_ERROR = (
+    "⚠️⚠️⚠️\nThe request timeout has elapsed.\n"
+    "Check if your node works or try again later."
+    )
+REQUEST_ERROR = (
+    "An error occurred while executing the request.\n"
+    "Please try again."
+)
