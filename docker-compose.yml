@@ -1,0 +1,12 @@
+version: '3'
+services:
+  muon-checker-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      restart: always
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+    volumes:
+      - ./main:/app/main
+    command: python main.py
