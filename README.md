@@ -46,15 +46,11 @@ TELEGRAM_TOKEN=6266692408fdsfsdf23123das
 sudo apt install docker.io 
 sudo apt install docker-compose
 ```
-Cобрать образ:
-```sh
-sudo docker build -t muonchecker:latest .
-```
-
 Запустите контейнер:
-
 ```sh
-sudo docker run -d muonchecker:latest
+sudo docker-compose up -d --build
+
 ```
+
 
 Ссылка на бота: https://t.me/MuonNodes_bot
