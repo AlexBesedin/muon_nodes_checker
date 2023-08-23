@@ -100,7 +100,7 @@ def handle_text_message(message, bot):
             text="The format of the IP address is incorrect. Please try again.")
         return
     try:
-        response = requests.get(f"http://{ip_address}:8000/status", timeout=50)
+        response = requests.get(f"http://{ip_address}:8011/status", timeout=50)
 
         if response.status_code == 200:
             json_data = response.json()
