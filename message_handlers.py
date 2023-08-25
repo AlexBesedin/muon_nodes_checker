@@ -105,6 +105,7 @@ def handle_text_message(message, bot):
         if response.status_code == 200:
             json_data = response.json()
             node_info = json_data.get('network', {}).get('nodeInfo', {})
+            tier_info = node_info.get('tier', '')
             node_id = node_info.get('id', '')
             node_active = node_info.get('active', '')
             node_id_link = f"[{node_id}](https://explorer.muon.net/nodes/{node_id})"
@@ -138,6 +139,7 @@ def handle_text_message(message, bot):
 
             message_text = (
                 f"👤 Node ID: {node_id_link}\n"
+                f"📊 Tier : {tier_info}\n"
                 f"🟢 Active: {node_active}\n"
                 f"🌐 Uptime: {uptime_value} %\n"
                 f"⚙️ Network: {network_info}\n"
