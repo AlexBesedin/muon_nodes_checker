@@ -41,8 +41,8 @@ def handle_start(message, bot, logger):
             username = message.from_user.username
             message_text = (
                 f"Hello, {username}!\n\n"
-                "*Enter the IP-address of your Muon Node:*\n"
-                "_Example:_"
+                "Enter the IP-address of your Muon Node:\n"
+                "Example:"
             )
             bot.send_message(
                 chat_id=message.chat.id,

@@ -1,7 +1,7 @@
 import logging
-import sqlite3
 import telebot
 from constants import TELEGRAM_TOKEN, FORMAT
+from db import create_database
 from message_handlers import (
     handle_start, 
     handle_help,
@@ -18,17 +18,9 @@ logging.basicConfig(
     encoding='utf-8'
 )
 logger = logging.getLogger(__name__)
-
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
-with sqlite3.connect('users.db') as conn:
-    cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE IF NOT EXISTS users
-                      (user_id INTEGER PRIMARY KEY, 
-                      interaction_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
-                   '''
-                   )
-    conn.commit()
+create_database()
 
 
 @bot.message_handler(commands=['start'])
