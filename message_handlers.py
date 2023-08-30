@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
 
-def handle_start(message, bot, logger):
+def handle_start(message):
     user_id = message.from_user.id
     try:
         with get_connection() as conn:
@@ -42,12 +42,12 @@ def handle_start(message, bot, logger):
             message_text = (
                 f"Hello, {username}!\n\n"
                 "Enter the IP-address of your Muon Node:\n"
-                "Example:"
-            )
+                "Example: 94.131.107.141")
+
             bot.send_message(
                 chat_id=message.chat.id,
                 text=message_text,
-                parse_mode='Markdown'
+                # parse_mode='Markdown'
             )
             image_path = os.path.join('pic', 'picpic.jpg')
             with open(image_path, 'rb') as image:
@@ -83,7 +83,7 @@ def handle_muon(message):
         parse_mode='Markdown')
     
 
-def handle_status(message, bot):
+def handle_status(message):
     """Обработчик команды /status"""
     status_message = get_status()
     bot.send_message(
@@ -91,7 +91,7 @@ def handle_status(message, bot):
         text=status_message)
     
 
-def handle_text_message(message, bot):
+def handle_text_message(message):
     """Обработчик текстовых сообщений"""
     ip_address = message.text.strip()
     if check(ip_address):

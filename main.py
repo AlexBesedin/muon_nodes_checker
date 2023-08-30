@@ -26,7 +26,7 @@ create_database()
 @bot.message_handler(commands=['start'])
 def start_command_handler(message):
     """Хендлер команды /start"""
-    handle_start(message, bot, logger)      
+    handle_start(message)      
     
 
 @bot.message_handler(commands=['help'])
@@ -56,7 +56,7 @@ def status_command_handler(message):
 @bot.message_handler(func=lambda message: True)
 def text_message_handler(message):
     """Хендлер тестовых сообщений"""
-    handle_text_message(message, bot)
+    handle_text_message(message)
 
             
 def main():
