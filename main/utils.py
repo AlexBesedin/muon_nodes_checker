@@ -103,6 +103,8 @@ def send_welcome_image(chat_id):
             bot.send_photo(chat_id=chat_id, photo=image)
     except Exception as e:
         logger.error(f'Send welcome image error: {str(e)}')
+        logger.info(f'Image path: {image_path}')
+
 
 
 def get_node_info(ip_address):
