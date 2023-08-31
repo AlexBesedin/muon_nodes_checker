@@ -52,5 +52,4 @@ sudo docker-compose up -d --build
 
 ```
 
-
 Ссылка на бота: https://t.me/MuonNodes_bot
