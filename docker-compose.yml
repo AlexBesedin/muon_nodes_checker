@@ -9,4 +9,4 @@ services:
       - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
     volumes:
       - ./main:/app/main
-    command: python main.py
+    command: python main/main.py
