@@ -37,7 +37,7 @@ def handle_start(message):
                 add_user_to_database(conn, user_id)
             username = message.from_user.username
             send_welcome_message(bot, message.chat.id, username)
-            send_welcome_image(bot, message.chat.id)
+            send_welcome_image(message.chat.id)
     except Exception as e:
         logger.error(f'An error occurred in the /start command handler: {str(e)}')
 

@@ -95,7 +95,7 @@ def send_welcome_message(bot, chat_id, username):
         logger.error(f'Send welcome message error: {str(e)}') 
         
 
-def send_welcome_image(bot, chat_id):
+def send_welcome_image(chat_id):
     """Отправка изображения с примером ввода IP-адреса"""
     try:
         image_path = os.path.join('pic', 'picpic.jpg')
