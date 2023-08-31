@@ -98,7 +98,7 @@ def send_welcome_message(bot, chat_id, username):
 def send_welcome_image(chat_id):
     """Отправка изображения с примером ввода IP-адреса"""
     try:
-        image_path = os.path.join('pic', 'picpic.jpg')
+        image_path = '/app/main/pic/picpic.jpg'
         with open(image_path, 'rb') as image:
             bot.send_photo(chat_id=chat_id, photo=image)
     except Exception as e:
