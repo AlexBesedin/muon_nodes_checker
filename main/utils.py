@@ -152,7 +152,7 @@ def parse_node_data(response):
                 uptime_value = next(
                     (tag_h6.text for tag_h6 in tag_div.find_all('h6') if '%' in tag_h6.text), 
                     'Error parsing id data')
-                uptime_value = float(''.join(filter(str.isdigit, uptime_value))) / 10
+                uptime_value = float(''.join(filter(str.isdigit, uptime_value))) / 100
             else:
                 uptime_value = 'Error parsing id data'
         except Exception as e:
