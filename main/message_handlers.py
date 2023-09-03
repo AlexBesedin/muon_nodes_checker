@@ -78,7 +78,7 @@ def handle_text_message(message):
     """Обработчик текстовых сообщений"""
     ip_address = message.text.strip()
     check_ip_address(message, ip_address)
-    response = get_node_info(ip_address)
+    response = get_node_info(ip_address, message)
     if response:
         message_text = parse_node_data(response)
         bot.send_message(

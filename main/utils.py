@@ -107,16 +107,22 @@ def send_welcome_image(chat_id):
 
 
 
-def get_node_info(ip_address):
+def get_node_info(ip_address, message):
     """Получение информации о доступности ip_адреса:8011/status"""
     try:
-        response = requests.get(f"http://{ip_address}:8011/status", timeout=50)
+        response = requests.get(f"http://{ip_address}:8011/status", timeout=10)
         return response
     except requests.exceptions.Timeout as t:
         logger.error(f'Request timed out: {str(t)}')
+        bot.send_message(
+            chat_id=message.chat.id,
+            text='Connection is not established. Your node is offline now or you have entered the wrong IP address. Try again later')
         return None
     except requests.exceptions.RequestException as r:
         logger.error(f'Request error: {str(r)}')
+        bot.send_message(
+            chat_id=message.chat.id,
+            text='Request error')
         return None
     
 
@@ -146,7 +152,7 @@ def parse_node_data(response):
                 uptime_value = next(
                     (tag_h6.text for tag_h6 in tag_div.find_all('h6') if '%' in tag_h6.text), 
                     'Error parsing id data')
-                uptime_value = float(''.join(filter(str.isdigit, uptime_value))) / 100
+                uptime_value = float(''.join(filter(str.isdigit, uptime_value))) / 10
             else:
                 uptime_value = 'Error parsing id data'
         except Exception as e:
