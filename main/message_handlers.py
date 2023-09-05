@@ -1,5 +1,6 @@
 import logging
 import telebot
+from sentry_sdk.integrations.logging import LoggingIntegration
 from utils import (
     get_status, 
     get_connection,
@@ -16,6 +17,12 @@ from constants import (
     HELP_TEXT,
     ABOUT_TEXT,
     MUON_TEXT)
+
+
+sentry_logging = LoggingIntegration(
+    level=logging.INFO,  # Уровень логирования для отправки в Sentry
+    event_level=logging.ERROR  # Уровень событий, которые будут отправляться в Sentry
+)
 
 
 logging.basicConfig(

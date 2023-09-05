@@ -1,6 +1,8 @@
 import logging
 import telebot
-from constants import TELEGRAM_TOKEN, FORMAT
+import sentry_sdk
+from sentry_sdk.integrations.logging import LoggingIntegration
+from constants import TELEGRAM_TOKEN, FORMAT, DSN
 from db import create_database
 from message_handlers import (
     handle_start, 
@@ -9,6 +11,17 @@ from message_handlers import (
     handle_muon,
     handle_status,
     handle_text_message)
+
+sentry_sdk.init(
+    dsn=DSN,
+    traces_sample_rate=0.85,
+)
+
+# Настройка интеграции Sentry с модулем логирования
+sentry_logging = LoggingIntegration(
+    level=logging.INFO,  # Уровень логирования для отправки в Sentry
+    event_level=logging.ERROR  # Уровень событий, которые будут отправляться в Sentry
+)
 
 
 logging.basicConfig(

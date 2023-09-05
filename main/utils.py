@@ -1,4 +1,3 @@
-import os
 import ipaddress
 import logging
 import telebot
@@ -6,10 +5,16 @@ import requests
 import sqlite3
 from datetime import datetime
 from bs4 import BeautifulSoup
+from sentry_sdk.integrations.logging import LoggingIntegration
 from constants import MUON_URL, TELEGRAM_TOKEN,LINKS_NODE_ID
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
+
+sentry_logging = LoggingIntegration(
+    level=logging.INFO,  # Уровень логирования для отправки в Sentry
+    event_level=logging.ERROR  # Уровень событий, которые будут отправляться в Sentry
+)
 logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s, %(levelname)s, %(name)s, %(message)s',

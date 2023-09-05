@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+DSN = os.getenv('DSN')
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 MUON_URL = 'https://explorer.muon.net/'
 LINKS_NODE_ID = 'https://explorer.muon.net/nodes/'
