@@ -113,9 +113,9 @@ def send_welcome_image(chat_id):
 
 
 def get_node_info(ip_address, message):
-    """Получение информации о доступности ip_адреса:8011/status"""
+    """Получение информации о доступности ip_адреса:8012/status"""
     try:
-        response = requests.get(f"http://{ip_address}:8011/status", timeout=10)
+        response = requests.get(f"http://{ip_address}:8012/status", timeout=10)
         return response
     except requests.exceptions.Timeout as t:
         logger.error(f'Request timed out: {str(t)}')
