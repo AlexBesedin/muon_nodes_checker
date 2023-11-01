@@ -58,11 +58,11 @@ def get_status():
             'class': 'card-footer border-0 bg-transparent'}
                             )
         numerical_elements = tag_div.find_all(
-            'h6', class_='fw-bold mb-0 mt-2 align-self-end')
+            'h5', class_='fw-bold mb-0 mt-2 align-self-end')
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         separator = '-' * 39
 
-        message = f"Muon Nodes Status:\n"
+        message = f"Pion Nodes Status:\n"
         message += f"{separator}\n"
         message += f"🟠 Total Nodes: {numerical_elements[0].get_text()}\n"
         message += f"🟢 Active Nodes: {numerical_elements[1].get_text()}\n"
@@ -93,7 +93,7 @@ def send_welcome_message(bot, chat_id, username):
     try:
         message_text = (
             f"Hello, {username}!\n\n"
-            "Enter the IP-address of your Muon Node:\n"
+            "Enter the IP-address of your PION Node:\n"
             "Example: 94.131.107.141")
         bot.send_message(chat_id=chat_id, text=message_text)
     except Exception as e:
@@ -139,7 +139,7 @@ def parse_node_data(response):
         tier_info = node_info.get('tier', '')
         node_id = node_info.get('id', '')
         node_active = node_info.get('active', '')
-        node_id_link = f"[{node_id}](https://explorer.muon.net/nodes/{node_id})"
+        node_id_link = f"[{node_id}](https://explorer.muon.net/pion/nodes/{node_id})"
         uptime_info = json_data.get('node', {}).get('uptime', '')
         networking_port = json_data.get('node', {}).get('networkingPort', '')
         network_info = json_data.get('managerContract', {}).get('network', '')
@@ -157,7 +157,7 @@ def parse_node_data(response):
                 uptime_value = next(
                     (tag_h6.text for tag_h6 in tag_div.find_all('h6') if '%' in tag_h6.text), 
                     'Error parsing id data')
-                uptime_value = float(''.join(filter(str.isdigit, uptime_value))) / 100
+                uptime_value = float(''.join(filter(str.isdigit, uptime_value)))
             else:
                 uptime_value = 'Error parsing id data'
         except Exception as e:

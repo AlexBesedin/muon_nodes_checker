@@ -5,8 +5,8 @@ load_dotenv()
 
 DSN = os.getenv('DSN')
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
-MUON_URL = 'https://explorer.muon.net/'
-LINKS_NODE_ID = 'https://explorer.muon.net/nodes/'
+MUON_URL = 'https://explorer.muon.net/pion'
+LINKS_NODE_ID = 'https://explorer.muon.net/pion/nodes/'
 FORMAT = '%(asctime)s, %(levelname)s, %(name)s, %(message)s'
 MUON_TEXT = (
     "What is Muon?\n\n"
@@ -18,7 +18,7 @@ MUON_TEXT = (
 ABOUT_TEXT = (
     '*ABOUT*\r\n\n'
     '[Alex Beszedin](https://github.com/AlexBesedin) - *Python-developer (back-end)*\n'
-    '[Кул стори, джун!](https://t.me/coolstoryjunior) - *Сообщество поддержки*'
+    '[Кул стори, джун!](https://t.me/coolstoryjunior) - *Support Community*'
     )
 HELP_TEXT = (
     '/start - Initializing the bot\n'
