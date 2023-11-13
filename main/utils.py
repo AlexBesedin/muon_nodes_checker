@@ -60,14 +60,14 @@ def get_status():
         numerical_elements = tag_div.find_all(
             'h5', class_='fw-bold mb-0 mt-2 align-self-end')
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        separator = '-' * 39
+        # separator = '-' * 39
 
         message = f"Pion Nodes Status:\n"
-        message += f"{separator}\n"
+        # message += f"{separator}\n"
         message += f"🟠 Total Nodes: {numerical_elements[0].get_text()}\n"
         message += f"🟢 Active Nodes: {numerical_elements[1].get_text()}\n"
         message += f"❌ Deactive Nodes: {numerical_elements[2].get_text()}\n"
-        message += f"{separator}\n"
+        # message += f"{separator}\n"
         message += f"Data as of {current_time}\n"
         return message
     except Exception as e:
